@@ -1,1 +1,13 @@
-{"name":"bytemonk-mcp-gateway-demo","private":true,"version":"1.0.0","type":"module","scripts":{"start":"node server.mjs","test":"node --test test.mjs"},"engines":{"node":">=20"}}
+{
+  "name": "uber-mcp-5000",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node --test test.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
