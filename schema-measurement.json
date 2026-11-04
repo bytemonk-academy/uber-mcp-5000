@@ -1,0 +1,346 @@
+{
+  "unit": "UTF-8 bytes",
+  "serialization": "Compact JSON.stringify, no whitespace",
+  "scope": "Illustrative model input snapshots through tool selection, before business-tool execution. Full history and definitions resent at each step. No LLM call, tokenizer, caching, transport overhead, or result response included.",
+  "eager": {
+    "initial": 1178,
+    "cumulative": 1178,
+    "per_request": [
+      1178
+    ],
+    "inputs": [
+      {
+        "tools": [
+          {
+            "name": "get_trip",
+            "description": "Read trip status, fare in cents, and payment reference for a support investigation.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "trip_id": {
+                  "type": "string",
+                  "description": "The fictional trip identifier, for example TRIP-1042."
+                }
+              },
+              "required": [
+                "trip_id"
+              ],
+              "additionalProperties": false
+            }
+          },
+          {
+            "name": "get_payment",
+            "description": "Read payment status, charged amount in cents, and refunded status for a trip.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "trip_id": {
+                  "type": "string",
+                  "description": "The fictional trip identifier, for example TRIP-1042."
+                }
+              },
+              "required": [
+                "trip_id"
+              ],
+              "additionalProperties": false
+            }
+          },
+          {
+            "name": "issue_refund",
+            "description": "Refund the full charged fare for an eligible cancelled trip. Reject duplicate refunds and invalid amounts.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "trip_id": {
+                  "type": "string",
+                  "description": "The fictional trip identifier, for example TRIP-1042."
+                },
+                "amount_cents": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "description": "Full refund amount in cents. Use 2400 for TRIP-1042."
+                }
+              },
+              "required": [
+                "trip_id",
+                "amount_cents"
+              ],
+              "additionalProperties": false
+            }
+          }
+        ],
+        "messages": [
+          {
+            "role": "user",
+            "content": "Read trip TRIP-1042."
+          }
+        ]
+      }
+    ]
+  },
+  "incremental": {
+    "initial": 786,
+    "cumulative": 3346,
+    "per_request": [
+      786,
+      1050,
+      1510
+    ],
+    "inputs": [
+      {
+        "tools": [
+          {
+            "name": "discover_tools",
+            "description": "Search enabled tools available to the caller.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "query": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "query"
+              ],
+              "additionalProperties": false
+            }
+          },
+          {
+            "name": "get_tool_schema",
+            "description": "Fetch the input schema for one allowed tool.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name"
+              ],
+              "additionalProperties": false
+            }
+          },
+          {
+            "name": "invoke_tool",
+            "description": "Execute a tool through the gateway. The server checks the session identity and permission.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "arguments": {
+                  "type": "object"
+                }
+              },
+              "required": [
+                "name",
+                "arguments"
+              ],
+              "additionalProperties": false
+            }
+          }
+        ],
+        "messages": [
+          {
+            "role": "user",
+            "content": "Read trip TRIP-1042."
+          }
+        ]
+      },
+      {
+        "tools": [
+          {
+            "name": "discover_tools",
+            "description": "Search enabled tools available to the caller.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "query": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "query"
+              ],
+              "additionalProperties": false
+            }
+          },
+          {
+            "name": "get_tool_schema",
+            "description": "Fetch the input schema for one allowed tool.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name"
+              ],
+              "additionalProperties": false
+            }
+          },
+          {
+            "name": "invoke_tool",
+            "description": "Execute a tool through the gateway. The server checks the session identity and permission.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "arguments": {
+                  "type": "object"
+                }
+              },
+              "required": [
+                "name",
+                "arguments"
+              ],
+              "additionalProperties": false
+            }
+          }
+        ],
+        "messages": [
+          {
+            "role": "user",
+            "content": "Read trip TRIP-1042."
+          },
+          {
+            "role": "assistant",
+            "tool_call": {
+              "name": "discover_tools",
+              "arguments": {
+                "query": "get_trip"
+              }
+            }
+          },
+          {
+            "role": "tool",
+            "name": "discover_tools",
+            "content": [
+              {
+                "name": "get_trip",
+                "description": "Read trip status, fare in cents, and payment reference for a support investigation."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "tools": [
+          {
+            "name": "discover_tools",
+            "description": "Search enabled tools available to the caller.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "query": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "query"
+              ],
+              "additionalProperties": false
+            }
+          },
+          {
+            "name": "get_tool_schema",
+            "description": "Fetch the input schema for one allowed tool.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name"
+              ],
+              "additionalProperties": false
+            }
+          },
+          {
+            "name": "invoke_tool",
+            "description": "Execute a tool through the gateway. The server checks the session identity and permission.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "arguments": {
+                  "type": "object"
+                }
+              },
+              "required": [
+                "name",
+                "arguments"
+              ],
+              "additionalProperties": false
+            }
+          }
+        ],
+        "messages": [
+          {
+            "role": "user",
+            "content": "Read trip TRIP-1042."
+          },
+          {
+            "role": "assistant",
+            "tool_call": {
+              "name": "discover_tools",
+              "arguments": {
+                "query": "get_trip"
+              }
+            }
+          },
+          {
+            "role": "tool",
+            "name": "discover_tools",
+            "content": [
+              {
+                "name": "get_trip",
+                "description": "Read trip status, fare in cents, and payment reference for a support investigation."
+              }
+            ]
+          },
+          {
+            "role": "assistant",
+            "tool_call": {
+              "name": "get_tool_schema",
+              "arguments": {
+                "name": "get_trip"
+              }
+            }
+          },
+          {
+            "role": "tool",
+            "name": "get_tool_schema",
+            "content": {
+              "name": "get_trip",
+              "description": "Read trip status, fare in cents, and payment reference for a support investigation.",
+              "inputSchema": {
+                "type": "object",
+                "properties": {
+                  "trip_id": {
+                    "type": "string",
+                    "description": "The fictional trip identifier, for example TRIP-1042."
+                  }
+                },
+                "required": [
+                  "trip_id"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
